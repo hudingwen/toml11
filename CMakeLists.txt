@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.4)
 enable_testing()
 
 project(toml11 VERSION 3.7.1)
@@ -12,14 +12,14 @@ option(TOML11_USE_UNRELEASED_TOML_FEATURES
     "use features in toml-lang/toml master while testing" OFF)
 
 include(CheckCXXCompilerFlag)
-if("${CMAKE_VERSION}" VERSION_GREATER 3.1)
+if("${CMAKE_VERSION}" VERSION_GREATER 3.4)
     set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "Boolean specifying whether compiler specific extensions are requested.")
     if(NOT DEFINED CMAKE_CXX_STANDARD)
         message(FATAL_ERROR "CMAKE_CXX_STANDARD is not defined. \
 The C++ standard whose features are requested to *build* all targets. \
 Remember that toml11 is a header only library that does NOT require compilation to use.")
     endif()
-    set(CMAKE_CXX_STANDARD_REQUIRED ON CACHE BOOL "Boolean describing whether the value of CXX_STANDARD is a requirement.")
+    SET(CMAKE_CXX_STANDARD 17)
 else()
     # Manually check for C++11 compiler flag.
     CHECK_CXX_COMPILER_FLAG("-std=c++11" COMPILER_SUPPORTS_CXX11)
